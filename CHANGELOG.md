@@ -3,7 +3,7 @@
 Each release, newest first. Tool facts that were re-checked (commands, menus, model names, pins) are noted with
 their source and date, as `MAINTAINING.md` describes.
 
-## 1.0.0 (unreleased)
+## 1.0.0 (26 Oct 2026)
 
 The first public release.
 
