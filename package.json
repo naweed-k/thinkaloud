@@ -1,0 +1,50 @@
+{
+  "name": "thinkaloud",
+  "version": "1.0.0",
+  "description": "Turn any AI tool into a companion that explains its reasoning, lets you decide, and teaches you to check its work.",
+  "keywords": [
+    "ai",
+    "ai-companion",
+    "agents-md",
+    "agent-skills",
+    "claude-code",
+    "codex",
+    "chatgpt",
+    "gemini",
+    "learning",
+    "security"
+  ],
+  "type": "module",
+  "bin": {
+    "thinkaloud": "bin/thinkaloud.mjs"
+  },
+  "files": [
+    "bin/",
+    "lib/",
+    "template/",
+    "chat/",
+    "interview/",
+    "CREDITS.md",
+    "SECURITY.md",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/naweed-k/thinkaloud.git"
+  },
+  "homepage": "https://github.com/naweed-k/thinkaloud#readme",
+  "bugs": {
+    "url": "https://github.com/naweed-k/thinkaloud/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "Naweed Kabir",
+  "license": "MIT"
+}

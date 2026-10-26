@@ -1,0 +1,321 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/naweed-k/thinkaloud/interview/questions.schema.json",
+  "title": "Thinkaloud interview questions",
+  "description": "Single source for the interview page, the start skill and the chat script.",
+  "type": "object",
+  "required": ["version", "opening", "chapters", "questions", "practice_due", "practice_intro", "practice", "practice_mirror", "closing"],
+  "additionalProperties": false,
+  "properties": {
+    "version": { "const": 1 },
+    "markup": { "type": "string" },
+    "opening": {
+      "type": "object",
+      "required": ["title", "body", "privacy", "privacy_rule", "button"],
+      "additionalProperties": false,
+      "properties": {
+        "title": { "$ref": "#/$defs/text" },
+        "body": { "type": "array", "items": { "$ref": "#/$defs/text" }, "minItems": 1 },
+        "privacy": {
+          "description": "Where the answers go, said truthfully for where the interview runs.",
+          "type": "object",
+          "required": ["page", "agent"],
+          "additionalProperties": false,
+          "properties": { "page": { "$ref": "#/$defs/text" }, "agent": { "$ref": "#/$defs/text" } }
+        },
+        "privacy_rule": { "type": "string" },
+        "button": { "$ref": "#/$defs/text" }
+      }
+    },
+    "chapters": {
+      "type": "array",
+      "minItems": 5,
+      "items": {
+        "type": "object",
+        "required": ["id", "number", "title"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "$ref": "#/$defs/id" },
+          "number": { "type": "integer", "minimum": 1, "maximum": 5 },
+          "title": { "$ref": "#/$defs/text" },
+          "intro": {
+            "type": "object",
+            "required": ["title", "body"],
+            "additionalProperties": false,
+            "properties": { "title": { "$ref": "#/$defs/text" }, "body": { "$ref": "#/$defs/text" } }
+          },
+          "skip_label": { "$ref": "#/$defs/text" },
+          "mirror": { "$ref": "#/$defs/mirror" }
+        }
+      }
+    },
+    "questions": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "allOf": [{ "$ref": "#/$defs/question" }], "required": ["chapter"] }
+    },
+    "practice_due": {
+      "description": "When round 2 is due. The check skill runs it and the close skill offers it, both from this rule.",
+      "type": "object",
+      "required": ["after_days", "min_sessions", "rule"],
+      "additionalProperties": false,
+      "properties": {
+        "after_days": { "type": "integer", "minimum": 1 },
+        "min_sessions": { "type": "integer", "minimum": 1 },
+        "rule": { "type": "string" }
+      }
+    },
+    "practice_intro": { "$ref": "#/$defs/text" },
+    "practice": {
+      "description": "Spot the problem, round 2: run by the check skill, not the interview.",
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "allOf": [{ "$ref": "#/$defs/question" }],
+        "required": ["patterns"],
+        "properties": {
+          "type": { "const": "calibration" },
+          "maps_to": { "type": "string", "pattern": "^profile\\.calibration_2\\.[a-z_]+$" }
+        }
+      }
+    },
+    "practice_mirror": {
+      "type": "object",
+      "required": ["maps_to", "validation", "compare", "scene_rule", "patterns_line", "patterns_rule"],
+      "additionalProperties": false,
+      "properties": {
+        "maps_to": { "const": "profile.coaching.validation" },
+        "validation": { "$ref": "#/$defs/validation" },
+        "compare": {
+          "type": "object",
+          "required": ["none_missed", "more", "same", "fewer"],
+          "additionalProperties": false,
+          "properties": {
+            "none_missed": { "$ref": "#/$defs/text" },
+            "more": { "$ref": "#/$defs/text" },
+            "same": { "$ref": "#/$defs/text" },
+            "fewer": { "$ref": "#/$defs/text" }
+          }
+        },
+        "scene_rule": { "$ref": "#/$defs/text" },
+        "patterns_line": { "$ref": "#/$defs/text" },
+        "patterns_rule": { "$ref": "#/$defs/text" }
+      }
+    },
+    "closing": {
+      "type": "object",
+      "required": ["title", "card", "exports", "footer"],
+      "additionalProperties": false,
+      "properties": {
+        "title": { "$ref": "#/$defs/text" },
+        "card": {
+          "type": "object",
+          "required": ["title", "lines", "phrases"],
+          "additionalProperties": false,
+          "properties": {
+            "title": { "$ref": "#/$defs/text" },
+            "lines": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["text"],
+                "additionalProperties": false,
+                "properties": { "when": { "type": "string" }, "text": { "$ref": "#/$defs/text" } }
+              }
+            },
+            "phrases": { "type": "object" },
+            "rules": { "type": "string" }
+          }
+        },
+        "exports": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "object",
+            "required": ["id", "title", "instructions"],
+            "additionalProperties": false,
+            "properties": {
+              "id": { "enum": ["workbench", "chat"] },
+              "title": { "$ref": "#/$defs/text" },
+              "file": { "type": "string" },
+              "copy": { "type": "string" },
+              "max_chars": { "type": "integer" },
+              "instructions": { "$ref": "#/$defs/text" },
+              "for_tools": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        },
+        "companion_card": {
+          "type": "object",
+          "required": ["template"],
+          "additionalProperties": false,
+          "properties": { "template": { "$ref": "#/$defs/text" } }
+        },
+        "footer": { "$ref": "#/$defs/text" }
+      }
+    }
+  },
+  "$defs": {
+    "text": { "type": "string", "minLength": 1 },
+    "id": { "type": "string", "pattern": "^[a-z0-9_-]+$" },
+    "option": {
+      "type": "object",
+      "required": ["id", "label", "value"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^[A-Za-z0-9_-]+$" },
+        "label": { "$ref": "#/$defs/text" },
+        "value": { "type": "string", "minLength": 1 },
+        "correct": { "type": "boolean" },
+        "grade": { "enum": ["best", "good"] },
+        "echo": { "$ref": "#/$defs/text" },
+        "other_text": { "type": "boolean" },
+        "exclusive": { "type": "boolean" }
+      }
+    },
+    "validation": {
+      "type": "object",
+      "required": ["0", "1", "2", "3"],
+      "additionalProperties": false,
+      "properties": {
+        "0": { "enum": ["high", "medium", "light"] },
+        "1": { "enum": ["high", "medium", "light"] },
+        "2": { "enum": ["high", "medium", "light"] },
+        "3": { "enum": ["high", "medium", "light"] }
+      }
+    },
+    "mirror": {
+      "type": "object",
+      "required": ["maps_to", "validation", "lines"],
+      "additionalProperties": false,
+      "properties": {
+        "maps_to": { "type": "string", "pattern": "^profile\\." },
+        "validation": { "$ref": "#/$defs/validation" },
+        "lines": {
+          "type": "array",
+          "minItems": 3,
+          "items": {
+            "type": "object",
+            "required": ["caught", "text"],
+            "additionalProperties": false,
+            "properties": {
+              "caught": { "type": "array", "minItems": 1, "items": { "type": "integer", "minimum": 0, "maximum": 3 } },
+              "text": { "$ref": "#/$defs/text" }
+            }
+          }
+        },
+        "scene_rule": { "type": "string" },
+        "extra": {
+          "type": "object",
+          "required": ["when", "text"],
+          "additionalProperties": false,
+          "properties": {
+            "when": {
+              "type": "object",
+              "required": ["trust_now_min", "caught_max"],
+              "additionalProperties": false,
+              "properties": { "trust_now_min": { "type": "integer" }, "caught_max": { "type": "integer" } }
+            },
+            "text": { "$ref": "#/$defs/text" }
+          }
+        }
+      }
+    },
+    "question": {
+      "type": "object",
+      "required": ["id", "type", "maps_to", "branch", "optional"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "chapter": { "type": "integer", "minimum": 1, "maximum": 5 },
+        "type": { "enum": ["single", "multi", "scale", "text", "date", "calibration", "info"] },
+        "prompt": { "$ref": "#/$defs/text" },
+        "why": { "$ref": "#/$defs/text" },
+        "options": { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/option" } },
+        "maps_to": {
+          "description": "A profile path (profile.x.y), MY-RULES.md, or null for info screens.",
+          "type": ["string", "null"],
+          "pattern": "^(profile\\.[a-z0-9_]+(\\.[a-z0-9_]+)*|MY-RULES\\.md)$"
+        },
+        "branch": { "enum": ["all", "learn", "build"] },
+        "in_both": { "type": "boolean", "description": "Asked on the short version when path is both." },
+        "optional": { "type": "boolean" },
+        "list": { "type": "boolean" },
+        "note": { "type": "string" },
+        "placeholder": { "type": "string" },
+        "chips": { "type": "array", "items": { "$ref": "#/$defs/text" } },
+        "chips_note": { "type": "string" },
+        "text_field": {
+          "type": "object",
+          "required": ["placeholder", "maps_to"],
+          "additionalProperties": false,
+          "properties": {
+            "placeholder": { "type": "string" },
+            "maps_to": { "type": "string", "pattern": "^profile\\." },
+            "list": { "type": "boolean" }
+          }
+        },
+        "scale": {
+          "type": "object",
+          "required": ["min", "max", "min_label", "max_label"],
+          "additionalProperties": false,
+          "properties": {
+            "min": { "const": 1 },
+            "max": { "const": 5 },
+            "min_label": { "$ref": "#/$defs/text" },
+            "max_label": { "$ref": "#/$defs/text" }
+          }
+        },
+        "name": { "$ref": "#/$defs/text" },
+        "watch": { "$ref": "#/$defs/text" },
+        "patterns": {
+          "description": "Plain pattern names from guide/ai-patterns.md that the scene shows.",
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/text" }
+        },
+        "multi": { "type": "boolean" },
+        "caught_if": { "enum": ["any-correct", "all-correct"] },
+        "scene": {
+          "type": "object",
+          "required": ["text"],
+          "additionalProperties": false,
+          "properties": {
+            "text": { "$ref": "#/$defs/text" },
+            "quote": { "$ref": "#/$defs/text" },
+            "code": { "$ref": "#/$defs/text" },
+            "code_language": { "type": "string" },
+            "after": { "$ref": "#/$defs/text" },
+            "reply": { "$ref": "#/$defs/text" }
+          }
+        },
+        "reveal": { "$ref": "#/$defs/text" },
+        "title": { "$ref": "#/$defs/text" },
+        "items": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/text" } },
+        "button": { "$ref": "#/$defs/text" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "type": { "enum": ["single", "multi"] } } },
+          "then": { "required": ["prompt", "why", "options"] }
+        },
+        {
+          "if": { "properties": { "type": { "const": "scale" } } },
+          "then": { "required": ["prompt", "why", "scale"] }
+        },
+        {
+          "if": { "properties": { "type": { "enum": ["text", "date"] } } },
+          "then": { "required": ["prompt", "why"] }
+        },
+        {
+          "if": { "properties": { "type": { "const": "calibration" } } },
+          "then": { "required": ["prompt", "name", "watch", "scene", "options", "multi", "caught_if", "reveal"] }
+        },
+        {
+          "if": { "properties": { "type": { "const": "info" } } },
+          "then": { "required": ["title", "items", "button"], "properties": { "maps_to": { "type": "null" } } }
+        }
+      ]
+    }
+  }
+}

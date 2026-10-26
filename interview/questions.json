@@ -1,0 +1,641 @@
+{
+  "version": 1,
+  "markup": "Strings may use inline Markdown: **bold**, *italics* and `code`. Placeholders are {name}.",
+  "opening": {
+    "title": "Before we start, let's get to know each other.",
+    "body": [
+      "A few questions so your AI can work *with* you, not just for you. About 8 minutes."
+    ],
+    "privacy": {
+      "page": "Skip anything. Your answers stay on this device. Nothing is sent anywhere.",
+      "agent": "Skip anything. Your answers go to the AI tool you're using, like any message you send it. What it saves is your profile, in this folder, and you can read and change it."
+    },
+    "privacy_rule": "Show `page` on the interview web page, where nothing leaves the browser. Show `agent` when an AI runs the interview.",
+    "button": "Begin"
+  },
+  "chapters": [
+    { "id": "starting", "number": 1, "title": "Where you're starting" },
+    { "id": "here-for", "number": 2, "title": "What you're here for" },
+    { "id": "think-with-you", "number": 3, "title": "How it should think with you" },
+    {
+      "id": "spot-the-problem",
+      "number": 4,
+      "title": "Spot the problem",
+      "intro": {
+        "title": "Three quick scenes.",
+        "body": "Each shows something an AI said. What would you do? This isn't a test. It's the most useful habit you'll build with AI."
+      },
+      "skip_label": "Skip this chapter",
+      "mirror": {
+        "maps_to": "profile.coaching.validation",
+        "validation": { "0": "high", "1": "high", "2": "medium", "3": "light" },
+        "lines": [
+          { "caught": [3], "text": "None of these got past you. That habit is rare, and your companion will build on it." },
+          { "caught": [1, 2], "text": "{scene} is the one to watch for. It slips past most people, and we'll practise it." },
+          { "caught": [0], "text": "These slip past most people at first. That's why your companion will show its evidence, and why the guide starts here." }
+        ],
+        "scene_rule": "{scene} is the name of the first scene they missed, in chapter order.",
+        "extra": {
+          "when": { "trust_now_min": 4, "caught_max": 1 },
+          "text": "Earlier you said you usually take answers as they are. That's worth changing, and it's easier than it sounds."
+        }
+      }
+    },
+    { "id": "boundaries", "number": 5, "title": "Boundaries" }
+  ],
+  "questions": [
+    {
+      "id": "name",
+      "chapter": 1,
+      "type": "text",
+      "prompt": "What should your AI call you?",
+      "why": "small, but it changes how the conversation feels.",
+      "maps_to": "profile.name",
+      "branch": "all",
+      "optional": true
+    },
+    {
+      "id": "language",
+      "chapter": 1,
+      "type": "single",
+      "prompt": "Which language should it reply in?",
+      "options": [
+        { "id": "en", "label": "English", "value": "English" },
+        { "id": "bn", "label": "বাংলা (Bangla)", "value": "Bangla" },
+        { "id": "es", "label": "Español", "value": "Spanish" },
+        { "id": "hi", "label": "हिन्दी (Hindi)", "value": "Hindi" },
+        { "id": "other", "label": "Other", "value": "other", "other_text": true }
+      ],
+      "why": "you think best in the language you're most comfortable in. Code and commands stay as they are.",
+      "maps_to": "profile.language",
+      "branch": "all",
+      "optional": true
+    },
+    {
+      "id": "tools",
+      "chapter": 1,
+      "type": "multi",
+      "prompt": "Which AI do you use most?",
+      "options": [
+        { "id": "chatgpt", "label": "ChatGPT", "value": "chatgpt" },
+        { "id": "claude", "label": "Claude", "value": "claude" },
+        { "id": "gemini", "label": "Gemini", "value": "gemini" },
+        { "id": "copilot", "label": "Copilot", "value": "copilot" },
+        { "id": "other", "label": "Something else", "value": "other", "other_text": true },
+        { "id": "none", "label": "I haven't really used one yet", "value": "none", "exclusive": true }
+      ],
+      "why": "to show you the setup that fits what you already have.",
+      "maps_to": "profile.tools",
+      "branch": "all",
+      "optional": true
+    },
+    {
+      "id": "usage_now",
+      "chapter": 1,
+      "type": "multi",
+      "prompt": "What do you use it for today?",
+      "options": [
+        { "id": "questions", "label": "Quick questions", "value": "questions" },
+        { "id": "writing", "label": "Writing", "value": "writing" },
+        { "id": "studying", "label": "Studying", "value": "studying" },
+        { "id": "code", "label": "Writing code", "value": "code" },
+        { "id": "apps", "label": "Building whole apps by prompting", "value": "apps" },
+        { "id": "not-much", "label": "Not much yet", "value": "not-much", "exclusive": true }
+      ],
+      "why": "so we start from where you are, not from zero.",
+      "maps_to": "profile.usage_now",
+      "branch": "all",
+      "optional": true
+    },
+    {
+      "id": "trust_now",
+      "chapter": 1,
+      "type": "scale",
+      "prompt": "When your AI gives you an answer, how much do you check it?",
+      "scale": { "min": 1, "max": 5, "min_label": "I check almost everything", "max_label": "I usually take it as it is" },
+      "why": "there's no right answer here. We'll come back to this in chapter 4.",
+      "maps_to": "profile.trust_self_report",
+      "branch": "all",
+      "optional": true
+    },
+    {
+      "id": "code_level",
+      "chapter": 1,
+      "type": "single",
+      "prompt": "Where are you with code?",
+      "options": [
+        { "id": "none", "label": "I've never written any", "value": "none" },
+        { "id": "tutorials", "label": "I've followed tutorials", "value": "tutorials" },
+        { "id": "small", "label": "I can build small things on my own", "value": "small" },
+        { "id": "regular", "label": "I write code regularly (study or work)", "value": "regular" }
+      ],
+      "why": "it sets how much your AI explains and which words it can assume you know.",
+      "maps_to": "profile.code_level",
+      "branch": "all",
+      "optional": true
+    },
+    {
+      "id": "path",
+      "chapter": 2,
+      "type": "single",
+      "prompt": "What do you want your AI to help with most?",
+      "options": [
+        { "id": "learn", "label": "**Learn:** understand what I'm studying", "value": "learn",
+          "echo": "Good. We'll aim for understanding that sticks, not answers that don't." },
+        { "id": "build", "label": "**Build:** make something real (an app, a site, a tool)", "value": "build",
+          "echo": "Good. We'll aim for things you can explain, not just things that run." },
+        { "id": "both", "label": "**Both**", "value": "both",
+          "echo": "Good. We'll keep the two modes separate so each gets the right habits." }
+      ],
+      "why": "learning and building need different habits from your AI.",
+      "maps_to": "profile.path",
+      "branch": "all",
+      "optional": true
+    },
+    {
+      "id": "study_level",
+      "chapter": 2,
+      "type": "single",
+      "prompt": "What are you studying?",
+      "options": [
+        { "id": "school", "label": "School", "value": "school" },
+        { "id": "university", "label": "University", "value": "university" },
+        { "id": "course", "label": "A course or bootcamp", "value": "course" },
+        { "id": "self", "label": "On my own", "value": "self" },
+        { "id": "job", "label": "For my job", "value": "job" }
+      ],
+      "text_field": { "placeholder": "Subject, e.g. \"Operating systems\"", "maps_to": "profile.learn.subjects", "list": true },
+      "why": "explanations should match your level and subject.",
+      "maps_to": "profile.learn.level",
+      "branch": "learn",
+      "in_both": true,
+      "optional": true
+    },
+    {
+      "id": "learn_style",
+      "chapter": 2,
+      "type": "single",
+      "prompt": "When you meet a new idea, what helps most?",
+      "options": [
+        { "id": "example-first", "label": "An example first, then the theory", "value": "example-first" },
+        { "id": "big-picture", "label": "The big picture first, then details", "value": "big-picture" },
+        { "id": "problems", "label": "Trying problems straight away", "value": "problems" },
+        { "id": "explain-back", "label": "Explaining it back in my own words", "value": "explain-back" }
+      ],
+      "why": "your AI will lead with this and still mix in the others. Mixing is what makes learning stick.",
+      "maps_to": "profile.learn.style",
+      "branch": "learn",
+      "in_both": false,
+      "optional": true
+    },
+    {
+      "id": "graded_work",
+      "chapter": 2,
+      "type": "single",
+      "prompt": "Will you use it for anything that's graded (assignments, take-home exams)?",
+      "options": [
+        { "id": "yes", "label": "Yes", "value": "yes" },
+        { "id": "sometimes", "label": "Sometimes", "value": "sometimes" },
+        { "id": "no", "label": "No", "value": "no" }
+      ],
+      "why": "for graded work your AI will help you understand and check your own attempt, but won't write the answer you hand in. That protects you, and it's how you actually learn it.",
+      "maps_to": "profile.learn.graded_work",
+      "branch": "learn",
+      "in_both": true,
+      "optional": true
+    },
+    {
+      "id": "deadline",
+      "chapter": 2,
+      "type": "date",
+      "prompt": "Any exam or deadline coming up?",
+      "why": "so practice can be spaced out before the date, not crammed.",
+      "maps_to": "profile.learn.deadlines",
+      "list": true,
+      "branch": "learn",
+      "in_both": true,
+      "optional": true
+    },
+    {
+      "id": "build_what",
+      "chapter": 2,
+      "type": "text",
+      "prompt": "What do you want to build?",
+      "chips": ["A portfolio site", "A tool for my work", "An app idea I have", "I just want to learn by building"],
+      "chips_note": "A chip fills the text box. They can edit it after.",
+      "why": "your first project shapes everything else, so it helps to start with something you care about.",
+      "maps_to": "profile.build.idea",
+      "branch": "build",
+      "in_both": true,
+      "optional": true
+    },
+    {
+      "id": "audience",
+      "chapter": 2,
+      "type": "single",
+      "prompt": "Who will use it?",
+      "options": [
+        { "id": "personal", "label": "Just me", "value": "personal" },
+        { "id": "small", "label": "Friends or a small group", "value": "small" },
+        { "id": "public", "label": "The public or customers", "value": "public" },
+        { "id": "unsure", "label": "Not sure yet", "value": "public" }
+      ],
+      "why": "the more people use it, the stricter the security check before it goes live.",
+      "maps_to": "profile.build.audience",
+      "note": "Sets preflight strictness. \"Not sure\" is stored as public.",
+      "branch": "build",
+      "in_both": true,
+      "optional": true
+    },
+    {
+      "id": "sensitive",
+      "chapter": 2,
+      "type": "multi",
+      "prompt": "Will it handle any of these?",
+      "options": [
+        { "id": "logins", "label": "Logins or accounts", "value": "logins" },
+        { "id": "payments", "label": "Payments", "value": "payments" },
+        { "id": "personal-data", "label": "People's personal data", "value": "personal-data" },
+        { "id": "ai-key", "label": "An AI API key (e.g. OpenAI, Anthropic, Google)", "value": "ai-key",
+          "echo": "Noted. Keys are the most common leak. Your AI will keep them out of your code from day one." },
+        { "id": "none", "label": "None of these", "value": "none", "exclusive": true },
+        { "id": "unsure", "label": "Not sure", "value": "unsure", "exclusive": true }
+      ],
+      "why": "these are where beginner projects most often get hurt. We'll check them before launch.",
+      "maps_to": "profile.build.sensitive",
+      "note": "Enables specific preflight checks.",
+      "branch": "build",
+      "in_both": true,
+      "optional": true
+    },
+    {
+      "id": "keyboard",
+      "chapter": 2,
+      "type": "single",
+      "prompt": "How do you want to split the work?",
+      "options": [
+        { "id": "ai-writes", "label": "AI writes, I review and make sure I understand it", "value": "ai-writes" },
+        { "id": "me-core", "label": "I write the core parts, AI helps and reviews", "value": "me-core" },
+        { "id": "mixed", "label": "Mix it, depending on the task", "value": "mixed" }
+      ],
+      "why": "both work. The first is faster; the second teaches more. You can change this any time.",
+      "maps_to": "profile.build.keyboard",
+      "branch": "build",
+      "in_both": false,
+      "optional": true
+    },
+    {
+      "id": "decision_style",
+      "chapter": 3,
+      "type": "single",
+      "prompt": "When there's an important choice to make for you, what should your AI do?",
+      "options": [
+        { "id": "options", "label": "Show me the options and let me choose", "value": "options" },
+        { "id": "recommend", "label": "Recommend one and tell me why", "value": "recommend" },
+        { "id": "decide", "label": "Just decide, and explain if I ask", "value": "decide" }
+      ],
+      "why": "this sets how often it asks you. Choices that touch security, money or your data will always come to you, whatever you pick here.",
+      "maps_to": "profile.decision_style",
+      "branch": "all",
+      "optional": true
+    },
+    {
+      "id": "explain_depth",
+      "chapter": 3,
+      "type": "single",
+      "prompt": "How much should it explain?",
+      "options": [
+        { "id": "line", "label": "One line: just the key reason", "value": "line" },
+        { "id": "paragraph", "label": "A short paragraph", "value": "paragraph" },
+        { "id": "teach", "label": "Teach me properly when something's new", "value": "teach" }
+      ],
+      "why": "too little and you can't explain your own work. Too much and you stop reading.",
+      "maps_to": "profile.explain_depth",
+      "branch": "all",
+      "optional": true
+    },
+    {
+      "id": "check_ins",
+      "chapter": 3,
+      "type": "single",
+      "prompt": "Can it ask you a quick question now and then, to check you've got it?",
+      "options": [
+        { "id": "important", "label": "Yes, after important steps", "value": "important" },
+        { "id": "on-request", "label": "Only when I ask", "value": "on-request" },
+        { "id": "off", "label": "No", "value": "off" }
+      ],
+      "why": "one good question does more for understanding than three explanations.",
+      "maps_to": "profile.check_ins",
+      "branch": "all",
+      "optional": true
+    },
+    {
+      "id": "stuck",
+      "chapter": 3,
+      "type": "single",
+      "prompt": "When you're stuck, what helps?",
+      "options": [
+        { "id": "hints", "label": "Hints first, answer if I still need it", "value": "hints" },
+        { "id": "answer-first", "label": "The answer, then the explanation", "value": "answer-first" },
+        { "id": "ask-first", "label": "Ask me what I've tried first", "value": "ask-first" }
+      ],
+      "why": "hints feel slower and teach more. It's your call.",
+      "maps_to": "profile.stuck",
+      "branch": "all",
+      "optional": true
+    },
+    {
+      "id": "tone",
+      "chapter": 3,
+      "type": "single",
+      "prompt": "How should it talk to you?",
+      "options": [
+        { "id": "brief", "label": "Straight and brief", "value": "brief" },
+        { "id": "warm", "label": "Warm and encouraging", "value": "warm" },
+        { "id": "teacher", "label": "Like a patient teacher", "value": "teacher" }
+      ],
+      "why": "you'll spend hours together. It should feel right.",
+      "maps_to": "profile.tone",
+      "branch": "all",
+      "optional": true
+    },
+    {
+      "id": "cal_citation",
+      "chapter": 4,
+      "type": "calibration",
+      "name": "The citation",
+      "watch": "invented sources",
+      "multi": false,
+      "caught_if": "any-correct",
+      "scene": {
+        "text": "You asked for evidence that spaced repetition helps. The AI replies:",
+        "quote": "\"According to Harlow & Chen (2019), *Journal of Applied Memory Research*, spaced repetition improves long-term retention by 74% compared with cramming.\""
+      },
+      "prompt": "What would you do?",
+      "options": [
+        { "id": "A", "label": "Use it. It has authors, a journal and a number.", "value": "A" },
+        { "id": "B", "label": "Ask the AI \"are you sure?\"", "value": "B" },
+        { "id": "C", "label": "Search for the paper yourself before using it.", "value": "C", "correct": true, "grade": "best" },
+        { "id": "D", "label": "Drop the number but keep the claim.", "value": "D" }
+      ],
+      "reveal": "**Check the source yourself (C).** AI can produce citations that look real but don't exist, with made-up authors, journals and numbers. Asking \"are you sure?\" usually gets a confident yes, because the same model is checking itself. The idea (spacing helps) is well supported. *This* paper and *this* number have to be found before you use them.",
+      "maps_to": "profile.calibration.citation",
+      "branch": "all",
+      "optional": true
+    },
+    {
+      "id": "cal_key",
+      "chapter": 4,
+      "type": "calibration",
+      "name": "The API key",
+      "watch": "keys in code and open endpoints",
+      "multi": true,
+      "caught_if": "all-correct",
+      "scene": {
+        "text": "You asked for a chatbot page. The AI says \"Done! Ready to deploy.\" and shows:",
+        "code": "const client = new AIClient({ apiKey: \"sk-proj-9f2c…\" });\n\napp.post(\"/chat\", async (req, res) => {\n  const reply = await client.chat({ model: MODEL, message: req.body.message });\n  res.json(reply);\n});",
+        "code_language": "js"
+      },
+      "prompt": "What's the problem? *(pick all that apply)*",
+      "options": [
+        { "id": "A", "label": "Nothing, it works.", "value": "A" },
+        { "id": "B", "label": "The API key is written into the code.", "value": "B", "correct": true },
+        { "id": "C", "label": "Anyone on the internet can call `/chat` as often as they like, on your bill.", "value": "C", "correct": true },
+        { "id": "D", "label": "It should use a different model.", "value": "D" }
+      ],
+      "reveal": "**B and C.** A key in the code ends up in git, and often in public. Bots search for them within minutes. Keys belong in a `.env` file that's never committed. And an open `/chat` endpoint lets strangers spend your money. It needs a limit on who can call it and how often. \"Works\" and \"ready to go live\" are different claims. Your companion runs a security check before anything goes live.",
+      "maps_to": "profile.calibration.key",
+      "branch": "all",
+      "optional": true
+    },
+    {
+      "id": "cal_claim",
+      "chapter": 4,
+      "type": "calibration",
+      "name": "The \"I checked\" claim",
+      "watch": "claims of work or checks that didn't happen",
+      "multi": false,
+      "caught_if": "any-correct",
+      "scene": {
+        "text": "You asked the AI to rename a setting in three files. It replies:",
+        "quote": "\"I've updated all three files and checked that everything still works.\"",
+        "after": "You look at what changed, and only one file is different."
+      },
+      "prompt": "What would you do?",
+      "options": [
+        { "id": "A", "label": "Trust it. Maybe the other two didn't need changes.", "value": "A" },
+        { "id": "B", "label": "Ask it to show exactly what it changed and how it checked.", "value": "B", "correct": true, "grade": "good" },
+        { "id": "C", "label": "Look at the changes yourself before moving on.", "value": "C", "correct": true, "grade": "best" },
+        { "id": "D", "label": "Ask it to do it again.", "value": "D" }
+      ],
+      "reveal": "**Look for yourself (C), and ask for the evidence (B).** AI tools sometimes describe work they didn't finish, or checks they didn't run, in the same confident tone as work they did. Your companion is set up to show proof: the changed files, the test output. And you'll learn where to look.",
+      "maps_to": "profile.calibration.claim",
+      "branch": "all",
+      "optional": true
+    },
+    {
+      "id": "always_on",
+      "chapter": 5,
+      "type": "info",
+      "title": "These are always on:",
+      "items": [
+        "your AI asks before anything that publishes, deletes or spends money",
+        "it never stores your passwords or keys",
+        "it keeps its memory to your work and study",
+        "it tells you when it isn't sure",
+        "it won't write work you hand in for a grade: it helps you understand it and check your own attempt",
+        "when it slips, as any AI can, it says so and names the pattern",
+        "it runs a security check before anything goes live"
+      ],
+      "button": "Got it",
+      "maps_to": null,
+      "note": "The promises as a short list. Stores nothing.",
+      "branch": "all",
+      "optional": false
+    },
+    {
+      "id": "never",
+      "chapter": 5,
+      "type": "text",
+      "prompt": "Anything your AI should never do?",
+      "placeholder": "e.g. never push to GitHub without asking · don't write my essays · no emojis",
+      "why": "your own rules sit next to the built-in ones, and you can edit them any time.",
+      "maps_to": "MY-RULES.md",
+      "branch": "all",
+      "optional": true
+    },
+    {
+      "id": "subscription",
+      "chapter": 5,
+      "type": "single",
+      "prompt": "Which plan are you on with your main AI?",
+      "options": [
+        { "id": "free", "label": "Free", "value": "free" },
+        { "id": "paid", "label": "A paid plan (e.g. Plus)", "value": "paid" },
+        { "id": "higher", "label": "A higher plan (e.g. Max, Pro+)", "value": "higher" },
+        { "id": "api", "label": "I pay per use (API)", "value": "api" },
+        { "id": "unsure", "label": "Not sure", "value": "unsure" }
+      ],
+      "why": "so your AI can pace big tasks and not run out halfway through a build.",
+      "maps_to": "profile.usage.plan",
+      "note": "Sets how your AI paces big tasks (guide/usage.md).",
+      "branch": "all",
+      "optional": true
+    },
+    {
+      "id": "hours",
+      "chapter": 5,
+      "type": "single",
+      "prompt": "Roughly how much time a week will you spend on this?",
+      "options": [
+        { "id": "under-3", "label": "Under 3 hours", "value": "under-3" },
+        { "id": "3-7", "label": "3–7", "value": "3-7" },
+        { "id": "7-15", "label": "7–15", "value": "7-15" },
+        { "id": "15-plus", "label": "15+", "value": "15-plus" }
+      ],
+      "why": "it sizes each step to fit a session, and spreads study sensibly before deadlines.",
+      "maps_to": "profile.hours_per_week",
+      "branch": "all",
+      "optional": true
+    }
+  ],
+  "practice_due": {
+    "after_days": 14,
+    "min_sessions": 5,
+    "rule": "Round 2 is due when `calibration_2` in memory/profile.md is empty, `created:` is at least after_days days ago, and memory/progress.md has at least min_sessions session lines. By then they've had real sessions to use the habits in, and round 1 is far enough back that round 2 isn't a memory test."
+  },
+  "practice_intro": "**Round 2.** Three new scenes, same idea as the first time. Different scenes, same habits.",
+  "practice": [
+    {
+      "id": "cal2_evidence",
+      "type": "calibration",
+      "name": "The wrong proof",
+      "watch": "evidence that proves something else",
+      "patterns": ["showing proof of something else"],
+      "multi": false,
+      "caught_if": "any-correct",
+      "scene": {
+        "text": "You asked the AI to fix the login page, which rejected correct passwords. It replies:",
+        "quote": "\"Fixed. Here's proof it works:\" and shows a screenshot of your site's home page loading normally."
+      },
+      "prompt": "What does the screenshot prove? *(pick one)*",
+      "options": [
+        { "id": "A", "label": "That login works now.", "value": "A" },
+        { "id": "B", "label": "Only that the home page loads. It says nothing about login.", "value": "B", "correct": true, "grade": "best" },
+        { "id": "C", "label": "Nothing. Screenshots can't prove anything.", "value": "C" },
+        { "id": "D", "label": "That the AI tested it.", "value": "D" }
+      ],
+      "reveal": "**B.** Evidence has to match the claim. A home page loading is real evidence of *something*, just not of a working login. Proof of the fix would be logging in with a correct password (and failing with a wrong one) and showing that. Look at what the evidence actually shows, not the word \"proof\" next to it.",
+      "maps_to": "profile.calibration_2.evidence",
+      "branch": "all",
+      "optional": true
+    },
+    {
+      "id": "cal2_extract",
+      "type": "calibration",
+      "name": "The misread brief",
+      "watch": "numbers and dates copied wrong",
+      "patterns": ["not checking what it copied"],
+      "multi": true,
+      "caught_if": "all-correct",
+      "scene": {
+        "text": "You pasted your assignment brief and asked for the key facts. The brief says:",
+        "quote": "\"Essay: 1,500 words (±10%). Submit by 23:59, Thursday 12 November, through the course portal.\"",
+        "after": "The AI replies:",
+        "reply": "\"Key facts: 2,000 words, due Friday 13 November, submit through the portal.\""
+      },
+      "prompt": "What's wrong? *(pick all that apply)*",
+      "options": [
+        { "id": "A", "label": "Nothing, it's a summary.", "value": "A" },
+        { "id": "B", "label": "The word count is wrong.", "value": "B", "correct": true },
+        { "id": "C", "label": "The deadline is wrong.", "value": "C", "correct": true },
+        { "id": "D", "label": "It should have said \"course portal\", not \"portal\".", "value": "D" }
+      ],
+      "reveal": "**B and C.** AI can misread numbers and dates from text sitting right in front of it, and then repeat the wrong value confidently. It's also one of the easiest slips to catch. Whenever it pulls out a number, date, name or requirement you'll act on, check it against the source. Your companion is set up to quote what it took before using it.",
+      "maps_to": "profile.calibration_2.extract",
+      "branch": "all",
+      "optional": true
+    },
+    {
+      "id": "cal2_look",
+      "type": "calibration",
+      "name": "The fix without looking",
+      "watch": "changes made before reading the error",
+      "patterns": ["acting before looking", "choosing without a reason"],
+      "multi": false,
+      "caught_if": "any-correct",
+      "scene": {
+        "text": "You told the AI \"the site is broken, fix it.\" Without asking anything or reading an error, it replies:",
+        "quote": "\"I've rewritten the router, the database connection and the login handler. Try it now.\""
+      },
+      "prompt": "What would you do? *(pick one)*",
+      "options": [
+        { "id": "A", "label": "Try it. Three fixes are better than one.", "value": "A" },
+        { "id": "B", "label": "Undo the changes. Ask it to read the actual error first and say what it thinks the cause is, and why, before changing anything.", "value": "B", "correct": true, "grade": "best" },
+        { "id": "C", "label": "Ask it to rewrite more files, just in case.", "value": "C" },
+        { "id": "D", "label": "Start a fresh chat and paste your whole project.", "value": "D" }
+      ],
+      "reveal": "**B.** It changed three things without looking at what was actually wrong. Even if the site works now, nobody knows which change fixed it, or what else it broke. Good debugging starts with the error message: read it, name a likely cause, test that one thing. Your companion reads before it acts, and says why before a big step.",
+      "maps_to": "profile.calibration_2.look",
+      "branch": "all",
+      "optional": true
+    }
+  ],
+  "practice_mirror": {
+    "maps_to": "profile.coaching.validation",
+    "validation": { "0": "high", "1": "high", "2": "medium", "3": "light" },
+    "compare": {
+      "none_missed": "None of these got past you. The habit is holding.",
+      "more": "More of these caught your eye than the first time. That's the habit working.",
+      "same": "{scene} is the one to watch for. Your companion will point it out when it happens.",
+      "fewer": "These were different slips, and {scene} is a tricky one. Worth a look at `guide/ai-patterns.md`."
+    },
+    "scene_rule": "Use `none_missed` when they caught all three. Otherwise compare the number caught with round 1 (profile.calibration) and use `more`, `same` or `fewer`; if round 1 was skipped, use `same`. Never say the numbers. {scene} is the name of the first round-2 scene they missed, in order, capitalised at the start of a sentence.",
+    "patterns_line": "In your sessions, I slipped most often by {pattern}.",
+    "patterns_rule": "Add patterns_line only if memory/lessons.md has an [observed] lesson named after a pattern. {pattern} is the plain name of the one with the highest ×N."
+  },
+  "closing": {
+    "title": "Meet your companion",
+    "card": {
+      "title": "Your companion, {name}",
+      "lines": [
+        { "text": "Replies in {language} · talks {tone} · explains {explain_depth}" },
+        { "text": "{decision_style} on important choices · {check_ins}" },
+        { "when": "path:learn|both", "text": "Helps you **learn**: {learn.subjects} ({learn.level})" },
+        { "when": "path:build|both", "text": "Helps you **build**: {build.idea}, {build.audience}{build.sensitive}" },
+        { "when": "missed", "text": "Watches especially for: {watch} (you'll practise spotting them)" },
+        { "when": "never", "text": "Your rules: {never}" }
+      ],
+      "phrases": {
+        "tone": { "brief": "straight and brief", "warm": "warmly and encouragingly", "teacher": "like a patient teacher" },
+        "explain_depth": { "line": "in one line", "paragraph": "in a short paragraph", "teach": "properly when something's new" },
+        "decision_style": { "options": "Shows you options", "recommend": "Recommends one and tells you why", "decide": "Decides and explains if you ask" },
+        "check_ins": { "important": "asks a quick check-in after important steps", "on-request": "checks you've got it when you ask", "off": "no check-ins" },
+        "learn.level": { "school": "school", "university": "university", "course": "a course or bootcamp", "self": "on your own", "job": "for your job" },
+        "build.audience": { "personal": "just for you", "small": "for a small group", "public": "for the public" },
+        "build.sensitive": { "logins": ", with logins", "payments": ", with payments", "personal-data": ", with personal data", "ai-key": ", with an AI API key" }
+      },
+      "rules": "Leave out any line whose values were skipped. {watch} joins the watch phrases of the missed scenes. build.sensitive phrases are joined in order; none and unsure add nothing."
+    },
+    "exports": [
+      {
+        "id": "workbench",
+        "title": "For a coding agent (workbench)",
+        "file": "profile.md",
+        "instructions": "Put this in your Thinkaloud folder, or run `npx thinkaloud@latest init --profile profile.md`."
+      },
+      {
+        "id": "chat",
+        "title": "For a chat app",
+        "copy": "companion card",
+        "max_chars": 1500,
+        "instructions": "Copy the companion card, plus the matching prompt (pocket or full).",
+        "for_tools": ["chatgpt", "claude", "gemini"]
+      }
+    ],
+    "companion_card": {
+      "template": "MY COMPANION CARD\nCall me: {name} · Reply in: {language} · Tone: {tone}\nI'm here to: {path} — {idea or subjects}\nCode level: {code_level} · Time: {hours_per_week}/week · Plan: {plan}\nImportant choices: {decision_style} · Explain: {explain_depth} · Check-ins: {check_ins} · When stuck: {stuck}\nGraded work: {graded_work} · Deadlines: {deadlines}\nBuilding for: {audience} · Handles: {sensitive}\nWatch with me for: {calibration misses, e.g. \"invented sources\"}\nKnows: {concepts I've shown I understand; I add these from end-of-chat lines}\nMy rules: {MY-RULES, one line each}"
+    },
+    "footer": "Change anything later. It's a plain text file you own."
+  }
+}
