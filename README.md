@@ -7,6 +7,7 @@
 
 <p align="center">
   <a href="https://github.com/naweed-k/thinkaloud/actions/workflows/ci.yml"><img alt="Tests on Windows, macOS and Linux" src="https://github.com/naweed-k/thinkaloud/actions/workflows/ci.yml/badge.svg"></a>
+  <a href="https://www.npmjs.com/package/thinkaloud"><img alt="npm version" src="https://img.shields.io/npm/v/thinkaloud?color=f2b53a&labelColor=2e1f36"></a>
   <a href="LICENSE"><img alt="MIT licence" src="https://img.shields.io/badge/licence-MIT-f2b53a?labelColor=2e1f36"></a>
   <img alt="Node 22 or newer" src="https://img.shields.io/badge/node-22%2B-f2b53a?labelColor=2e1f36">
   <img alt="Zero runtime dependencies" src="https://img.shields.io/badge/dependencies-0-f2b53a?labelColor=2e1f36">
